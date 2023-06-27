@@ -27,10 +27,16 @@ def main():
     (check_reboot, "Pending reboot."),
     (check_root_full, "Root partitiion full")
     ]
+
+    everything_okay=True
+
     for check, msg in checks:
         if check():
             print(msg)
-            sys.exit(1)
+            everything_okay= False
+
+    if not everything_okay:
+        sys.exit(1)
 
     print("Everything okay")
     sys.exit(0)
